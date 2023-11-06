@@ -39,3 +39,12 @@ class ProductModal {
     );
   }
 }
+
+
+
+class MyVariable  {
+  static String? name;
+  static String? email;
+  static int? mobileNo;
+
+}
