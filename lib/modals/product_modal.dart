@@ -1,4 +1,6 @@
 class ProductModal {
+  static List<Map> productList = [];
+
   final String title;
   final String description;
   final int price;
@@ -38,13 +40,4 @@ class ProductModal {
       data['images'],
     );
   }
-}
-
-
-
-class MyVariable  {
-  static String? name;
-  static String? email;
-  static int? mobileNo;
-
 }

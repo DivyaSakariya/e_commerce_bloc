@@ -1,5 +1,7 @@
-import 'package:e_commerce_bloc/controllers/home_controller.dart';
+import 'package:e_commerce_bloc/controllers/cart_controller.dart';
+import 'package:e_commerce_bloc/controllers/get_product_controller.dart';
 import 'package:e_commerce_bloc/helpers/api_helper.dart';
+import 'package:e_commerce_bloc/modals/product_modal.dart';
 import 'package:e_commerce_bloc/routes/routes.dart';
 import 'package:e_commerce_bloc/views/screens/cart_page.dart';
 import 'package:e_commerce_bloc/views/screens/favourite_apge.dart';
@@ -24,32 +26,32 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'eCommerce',
+      title: 'eCommerce BLOc',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,
       ),
       home: BlocProvider(
-        create: (context) => HomeController(),
+        create: (context) => GetProductController(),
         child: HomePage(),
       ),
       initialRoute: MyRoutes.homePage,
       routes: {
-        MyRoutes.productDetailPage: (context) => BlocProvider<HomeController>(
-              create: (_) => HomeController(),
+        MyRoutes.productDetailPage: (context) => BlocProvider(
+              create: (_) => CartController(ProductModal.productList),
               child: const ProductDetailPage(),
             ),
-        MyRoutes.favouritePage: (context) => BlocProvider<HomeController>(
-              create: (_) => HomeController(),
+        MyRoutes.favouritePage: (context) => BlocProvider(
+              create: (_) => CartController(ProductModal.productList),
               child: const FavouritePage(),
             ),
-        MyRoutes.cartPage: (context) => BlocProvider<HomeController>(
-              create: (_) => HomeController(),
+        MyRoutes.cartPage: (context) => BlocProvider(
+              create: (_) => CartController(ProductModal.productList),
               child: const CartPage(),
             ),
-        MyRoutes.userInfoPage: (context) => BlocProvider<HomeController>(
-              create: (_) => HomeController(),
-              child: const UserInfoPage(),
+        MyRoutes.userInfoPage: (context) => BlocProvider(
+              create: (_) => CartController(ProductModal.productList),
+              child: UserInfoPage(),
             ),
       },
     );

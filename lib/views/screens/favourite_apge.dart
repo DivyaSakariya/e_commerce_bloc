@@ -1,4 +1,5 @@
-import 'package:e_commerce_bloc/controllers/home_controller.dart';
+import 'package:e_commerce_bloc/controllers/cart_controller.dart';
+import 'package:e_commerce_bloc/helpers/api_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,8 +10,6 @@ class FavouritePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    HomeController controller = HomeController();
-
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -35,9 +34,10 @@ class FavouritePage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(15),
-        child: BlocBuilder<HomeController, Map>(builder: (context, state) {
+        child:
+            BlocBuilder<CartController, List<Map>>(builder: (context, state) {
           return ListView.builder(
-            itemCount: controller.favourite.length,
+            itemCount: ApiHelper.apiHelper.allProducts.length,
             itemBuilder: (context, index) => Card(
               child: ListTile(
                 onTap: () {
@@ -48,11 +48,11 @@ class FavouritePage extends StatelessWidget {
                 },
                 leading: CircleAvatar(
                   foregroundImage: NetworkImage(
-                    controller.favourite[index].thumbnail,
+                    ApiHelper.apiHelper.allProducts[index].thumbnail,
                   ),
                 ),
                 title: Text(
-                  controller.favourite[index].title,
+                  ApiHelper.apiHelper.allProducts[index].title,
                   style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
@@ -60,7 +60,7 @@ class FavouritePage extends StatelessWidget {
                   ),
                 ),
                 trailing: Text(
-                  "\$ ${controller.favourite[index].price}",
+                  "\$ ${ApiHelper.apiHelper.allProducts[index].price}",
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
